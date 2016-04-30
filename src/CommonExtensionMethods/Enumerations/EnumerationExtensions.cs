@@ -89,5 +89,30 @@ namespace CommonExtensionMethods.Enumerations
                 yield return func(i++, item);
             }
         }
+        
+        public static IEnumerable<T> Suffle<T>(this IEnumerable<T> list)
+        {
+
+            var ary = list.ToArray();
+
+            System.Random rng = new System.Random();
+            int n = ary.Length;
+            while (n > 1)
+            {
+                n--;
+                int k = rng.Next(n + 1);
+                T tmp = ary[k];
+                ary[k] = ary[n];
+                ary[n] = tmp;
+            }
+            return ary;
+        }
+
+        public static T[] ToARRAY<T>(this IEnumerable<T> list)
+        {
+
+            return System.Linq.Enumerable.ToArray<T>(list);
+        }
+        
     }
 }
